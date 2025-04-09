@@ -2,16 +2,17 @@
 
 require __DIR__ . '/inc/all.inc.php';
 
-$page = @(string) $_GET['page'] ?? 'index';
+$route = @(string) $_GET['route'] ?? 'pages';
 
-if ($page === 'index') {
+if ($route === 'pages') {
+    $page = @(string) $_GET['page'] ?? 'index';
+
     $pagesRepository = new \App\Repository\PagesRepository($pdo);
     // $pagesRepository->getPageBySlug($page);
 
     $pagesController = new \App\Frontend\Controller\PagesController($pagesRepository);
-    $pagesController->showPage('index');
+    $pagesController->showPage($page);
 } else {
     $notFoundController = new \App\Frontend\Controller\NotFoundController();
     $notFoundController->error404();
-    exit;
 }

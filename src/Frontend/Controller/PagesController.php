@@ -12,6 +12,11 @@ class PagesController extends AbstractController
     {
         $page = $this->pagesRepository->getPageBySlug($pageKey);
 
+        if (!$page) {
+            $this->error404();
+            return;
+        }
+
         $this->render('pages/showPage', [
             'page' => $page,
         ]);
