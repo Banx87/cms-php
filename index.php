@@ -6,7 +6,8 @@ $page = @(string) $_GET['page'] ?? 'index';
 
 
 if ($page === 'index') {
-    echo "TODO: Develop the index page";
+    $pagesController = new \App\Frontend\Controller\PagesController();
+    $pagesController->showPage('index');
 } else {
     $notFoundController = new \App\Frontend\Controller\NotFoundController();
     $notFoundController->error404();
