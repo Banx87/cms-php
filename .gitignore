@@ -1,0 +1,28 @@
+config.php
+.htpasswd
+.htaccess
+helper.php
+
+# Dependency directories
+/vendor/
+/node_modules/
+
+# Temporary and cache files
+/storage/
+/cache/
+*.log
+*.tmp
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.*
