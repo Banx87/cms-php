@@ -1,0 +1,1 @@
+<h1>I am the index.view.php from the admin</h1>
