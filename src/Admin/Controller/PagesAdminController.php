@@ -20,26 +20,34 @@ class PagesAdminController extends AbstractAdminController
 
     public function create()
     {
+        $errors = [];
+
+
         if (!empty($_POST)) {
             // Validate the data
             $title = @(string) ($_POST['title'] ?? '');
             $slug = @(string) ($_POST['slug'] ?? '');
             $content = @(string) ($_POST['content'] ?? '');
 
+            /* This method ensures that the slug is cleaned and formatted properly */
+            $slug = $this->pagesRepository->sanitizeSlug($slug);
+
             if (!empty($title) && !empty($slug) && !empty($content)) {
                 $slugExists = $this->pagesRepository->getSlugExists($slug);
                 if (!$slugExists) {
-                    // Save the page to the database
+                    // Save the page to the database and redirect to the index page
                     $this->pagesRepository->create($title, $slug, $content);
+                    header('Location: index.php?route=admin/pages');
+                } else {
+                    $errors[] = 'Slug already exists!';
                 }
             } else {
                 // Handle validation error
-                echo "All fields are required.";
+                $errors[] = 'All fields are required!';
             }
-
-            header('Location: /admin/pages');
-            exit;
         }
-        $this->render('pages/create', []);
+        $this->render('pages/create', [
+            'errors' => $errors,
+        ]);
     }
 }
