@@ -20,7 +20,8 @@ $container->bind('notFoundController', function () use ($container) {
 });
 // ADMIN STUFF
 $container->bind('pagesAdminController', function () use ($container) {
-    return new \App\Admin\Controller\PagesAdminController();
+    $pagesRepository = $container->get('pagesRepository');
+    return new \App\Admin\Controller\PagesAdminController($pagesRepository);
 });
 
 $route = @(string) $_GET['route'] ?? 'pages';
@@ -33,6 +34,9 @@ if ($route === 'pages' || empty($route)) {
 } elseif ($route === 'admin/pages') {
     $pagesAdminController = $container->get('pagesAdminController');
     $pagesAdminController->index();
+} elseif ($route === 'admin/pages/create') {
+    $pagesAdminController = $container->get('pagesAdminController');
+    $pagesAdminController->create();
 } else {
     $notFoundController = $container->get('notFoundController');
     $notFoundController->error404();

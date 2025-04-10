@@ -17,6 +17,11 @@ class PagesRepository
 
     public function getNavigation(): array
     {
+        return $this->get();
+    }
+
+    public function get(): array
+    {
         $stmt = $this->pdo->query('SELECT * FROM pages ORDER BY id ASC');
         $stmt->execute();
         $entries = $stmt->fetchAll(PDO::FETCH_CLASS, PageModel::class);
@@ -33,5 +38,29 @@ class PagesRepository
         $entry = $stmt->fetch();
 
         return $entry ?: null;
+    }
+
+    public function getSlugExists(string $slug): bool
+    {
+        /**
+         * Checks if a page with the given slug exists in the database.
+         *
+         * @param string $slug The slug to search for in the pages table.
+         * @return bool True if a page with the given slug exists, false otherwise.
+         */
+        $stmt = $this->pdo->prepare('SELECT COUNT(*) as count FROM pages WHERE slug = :slug');
+        $stmt->execute(['slug' => $slug]);
+        return (bool) $stmt->fetchColumn();
+    }
+
+    public function create(string $title, string $slug, string $content)
+    {
+
+        $stmt = $this->pdo->prepare('INSERT INTO pages (title, slug, content) VALUES (:title, :slug, :content)');
+        return $stmt->execute([
+            'title' => $title,
+            'slug' => $slug,
+            'content' => $content,
+        ]);
     }
 }
