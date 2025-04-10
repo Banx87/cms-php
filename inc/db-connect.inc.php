@@ -10,3 +10,5 @@ try {
     echo 'A problem occurred with the database connection...';
     die();
 }
+
+return $pdo;
