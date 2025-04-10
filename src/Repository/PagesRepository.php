@@ -63,4 +63,18 @@ class PagesRepository
             'content' => $content,
         ]);
     }
+
+    public function sanitizeSlug($slug)
+    {
+        // Convert to lowercase
+        $slug = strtolower($slug);
+
+        // Replace spaces and slashes with hyphens
+        $slug = str_replace(['/', ' ', '.'], ['-'], $slug);
+
+        // Remove all non-alphanumeric characters except hyphens
+        $slug = preg_replace('/[^a-z0-9\-]/', '', $slug);
+
+        return $slug;
+    }
 }
