@@ -66,25 +66,24 @@ class PagesAdminController extends AbstractAdminController
     public function edit()
     {
         $errors = [];
+        $id = @(int) ($_GET['id'] ?? 0);
 
         if (!empty($_POST)) {
             // Validate the data
-            $id = @(int) ($_POST['id'] ?? '');
             $title = @(string) ($_POST['title'] ?? '');
-            // $slug = @(string) ($_POST['slug'] ?? '');
             $content = @(string) ($_POST['content'] ?? '');
 
-            if (!empty($id) && !empty($title) && !empty($content)) {
+            if (!empty($title) && !empty($content)) {
                 // Save the page to the database and redirect to the index page
                 $this->pagesRepository->update($id, $title, $content);
-                header('Location: index.php?route=admin/pages');
             } else {
                 // Handle validation error
                 $errors[] = 'All fields are required!';
             }
+            header('Location: index.php?route=admin/pages');
+            return;
         }
 
-        $id = @(int) ($_GET['id'] ?? 0);
         if (!empty($id)) {
             $page = $this->pagesRepository->getPageById($id);
             if ($page) {

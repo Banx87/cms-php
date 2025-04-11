@@ -81,7 +81,7 @@ class PagesRepository
         return $stmt->execute(['id' => $id]);
     }
 
-    public function update($id, $title, $content)
+    public function update(int $id, string $title, string $content)
     {
         $stmt = $this->pdo->prepare('UPDATE pages SET title = :title, content = :content WHERE id = :id');
         return $stmt->execute([
