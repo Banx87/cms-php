@@ -53,9 +53,6 @@ class PagesAdminController extends AbstractAdminController
 
     public function delete()
     {
-        var_dump("The following entry should be deleted: " . $_POST['id']);
-        var_dump($_POST);
-
         $id = @(int) ($_POST['id'] ?? 0);
         if (!empty($id)) {
             $this->pagesRepository->delete($id);
