@@ -64,6 +64,12 @@ class PagesRepository
         ]);
     }
 
+    public function delete($id)
+    {
+        $stmt = $this->pdo->prepare('DELETE FROM pages WHERE id = :id');
+        return $stmt->execute(['id' => $id]);
+    }
+
     public function sanitizeSlug($slug)
     {
         // Convert to lowercase

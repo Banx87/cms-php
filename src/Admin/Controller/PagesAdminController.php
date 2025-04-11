@@ -50,4 +50,19 @@ class PagesAdminController extends AbstractAdminController
             'errors' => $errors,
         ]);
     }
+
+    public function delete()
+    {
+        var_dump("The following entry should be deleted: " . $_POST['id']);
+        var_dump($_POST);
+
+        $id = @(int) ($_POST['id'] ?? 0);
+        if (!empty($id)) {
+            $this->pagesRepository->delete($id);
+            header('Location: index.php?route=admin/pages');
+        } else {
+            // Handle error: ID is not provided
+            $this->error404();
+        }
+    }
 }

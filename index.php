@@ -37,6 +37,9 @@ if ($route === 'pages' || empty($route)) {
 } elseif ($route === 'admin/pages/create') {
     $pagesAdminController = $container->get('pagesAdminController');
     $pagesAdminController->create();
+} elseif ($route === 'admin/pages/delete') {
+    $pagesAdminController = $container->get('pagesAdminController');
+    $pagesAdminController->delete();
 } else {
     $notFoundController = $container->get('notFoundController');
     $notFoundController->error404();
