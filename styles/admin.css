@@ -2,4 +2,47 @@
 	--accent: #cc5e5e;
 	--accent-bg: #fff797;
 	--border: #cc5e5e;
+
+	--svg-size: 25px;
+}
+
+table {
+	border: none !important;
+	border-collapse: collapse;
+}
+
+.btn.action-btn {
+	width: 100%;
+	display: inline-flex;
+	gap: 10px;
+	justify-content: center;
+	align-items: center;
+	border-left-width: 0px;
+	border-top-width: 0px;
+}
+
+.icon {
+	width: var(--svg-size);
+	height: var(--svg-size);
+	fill: var(--accent);
+}
+
+.form button,
+a.btn button {
+	background-color: var(--accent-bg);
+	color: var(--accent);
+	font-size: 1.2rem;
+	padding: 5px 10px;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+}
+
+.form button:hover,
+a.btn button:hover {
+	background-color: var(--accent);
+}
+
+.form button:hover .icon,
+a.btn button:hover .icon {
+	fill: var(--accent-bg);
 }
