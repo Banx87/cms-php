@@ -1,0 +1,1 @@
+<h1>THIS IS THE EDIT PAGE FOR <?php echo e($page->id); ?></h1>
