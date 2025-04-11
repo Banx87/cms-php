@@ -29,6 +29,17 @@ class PagesRepository
         return $entries ?: [];
     }
 
+    public function getPageById(int $id): ?PageModel
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM pages WHERE id = :id');
+        $stmt->execute(['id' => $id]);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, PageModel::class);
+
+        $entry = $stmt->fetch();
+
+        return $entry ?: null;
+    }
+
     public function getPageBySlug(string $slug): ?PageModel
     {
         $stmt = $this->pdo->prepare('SELECT * FROM pages WHERE slug = :slug');
@@ -68,6 +79,16 @@ class PagesRepository
     {
         $stmt = $this->pdo->prepare('DELETE FROM pages WHERE id = :id');
         return $stmt->execute(['id' => $id]);
+    }
+
+    public function update($id, $title, $content)
+    {
+        $stmt = $this->pdo->prepare('UPDATE pages SET title = :title, content = :content WHERE id = :id');
+        return $stmt->execute([
+            'id' => $id,
+            'title' => $title,
+            'content' => $content,
+        ]);
     }
 
     public function sanitizeSlug($slug)
