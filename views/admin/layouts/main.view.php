@@ -19,6 +19,7 @@
         <nav>
 
         </nav>
+        <a href='index.php?page=index'>To Wayne mansion</a>
     </header>
     <main>
         <?php echo $contents; ?>
