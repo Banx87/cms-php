@@ -16,9 +16,16 @@
             <a href="index.php">CMS: Admin</a>
         </h1>
         <p>My admin area</p>
+        <?php if (!empty($isLoggedIn)): ?>
         <nav>
-
+            <a href="index.php?<?php echo http_build_query(['route' => 'admin/logout']); ?>" class="action-btn btn"
+                name="logout">
+                <button class="btn logout-btn">
+                    Logout
+                </button>
+            </a>
         </nav>
+        <?php endif;  ?>
         <a href='index.php?page=index'>To Wayne mansion</a>
     </header>
     <main>

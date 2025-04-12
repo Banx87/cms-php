@@ -46,3 +46,7 @@ a.btn button:hover {
 a.btn button:hover .icon {
 	fill: var(--accent-bg);
 }
+
+.logout-btn:hover {
+	color: var(--accent-bg);
+}
