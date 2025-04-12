@@ -7,7 +7,10 @@ use App\Admin\Support\AuthService;
 class LoginController extends AbstractAdminController
 {
 
-    public function __construct(private $authService) {}
+    public function __construct(AuthService $authService)
+    {
+        parent::__construct($authService);
+    }
 
     public function Login()
     {

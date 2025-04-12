@@ -2,19 +2,21 @@
 
 namespace App\Admin\Controller;
 
+use App\Admin\Support\AuthService;
 use App\Repository\PagesRepository;
 
 class PagesAdminController extends AbstractAdminController
 {
 
-    public function __construct(private PagesRepository $pagesRepository) {}
+    public function __construct(private PagesRepository $pagesRepository, protected AuthService $authService)
+    {
+        parent::__construct($authService);
+    }
 
     public function index()
     {
-
         $pages = $this->pagesRepository->get();
 
-        // $this->error404();
         $this->render('pages/index', ['pages' => $pages]);
     }
 
