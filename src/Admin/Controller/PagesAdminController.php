@@ -87,7 +87,7 @@ class PagesAdminController extends AbstractAdminController
         if (!empty($id)) {
             $page = $this->pagesRepository->getPageById($id);
             if ($page) {
-                $this->render('pages/edit', ['page' => $page]);
+                $this->render('pages/edit', ['page' => $page, 'errors' => $errors]);
             } else {
                 // Handle error: Page not found
                 $this->error404();
