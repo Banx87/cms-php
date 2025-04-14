@@ -1,15 +1,15 @@
 <h1>CREATE A NEW PAGE</h1>
 
 <?php if (!empty($errors)): ?>
-<ul>
-    <?php foreach ($errors as $error): ?>
-    <li><?php echo e($error) ?></li>
-    <?php endforeach; ?>
-</ul>
+    <ul>
+        <?php foreach ($errors as $error): ?>
+            <li><?php echo e($error) ?></li>
+        <?php endforeach; ?>
+    </ul>
 <?php endif ?>
 
 <form action="index.php?route=admin/pages/create" method="POST">
-
+    <input type="hidden" name="_csrf" value="<?php echo e(csrf_token()); ?>">
     <label for="title">Title: </label>
     <input type="text" name="title" value="<?php if (!empty($_POST['title'])) echo e((string) $_POST['title']) ?> "
         id="title">

@@ -8,7 +8,7 @@ if (!empty($errors)): ?>
 <?php endif; ?>
 
 <form action="index.php?<?php echo http_build_query(['route' => 'admin/login']); ?>" method="post">
-
+    <input type="hidden" name="_csrf" value="<?php echo e(csrf_token()); ?>">
     <label for="login-username">Username:</label>
     <input type="text" id="login-username" name="username"
         value="<?php if (!empty($_POST['username'])) echo e($_POST['username']) ?>" required>
