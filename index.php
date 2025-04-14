@@ -1,5 +1,7 @@
 <?php
 
+use App\Support\csrfHelper;
+
 require __DIR__ . '/inc/all.inc.php';
 
 $container = new \App\Support\Container;
@@ -32,6 +34,21 @@ $container->bind('loginController', function () use ($container) {
     $authService = $container->get('authService');
     return new \App\Admin\Controller\LoginController($authService);
 });
+$container->bind('csrfHelper', function () {
+    return new \App\Support\csrfHelper();
+});
+
+$csrfHelper = $container->get('csrfHelper');
+$csrfHelper->handle();
+
+// var_dump($csrfHelper->generateToken());
+function csrf_token()
+{
+    global $container;
+    $csrfHelper = $container->get('csrfHelper');
+    return $csrfHelper->generateToken();
+}
+
 
 $route = @(string) $_GET['route'] ?? 'pages';
 
