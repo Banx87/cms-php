@@ -1,6 +1,6 @@
 <?php
 
-namespace APP\Support;
+namespace App\Support;
 
 class container
 {
@@ -11,7 +11,6 @@ class container
     {
         $this->recipes[$what] = $recipe;
     }
-
 
     public function get($what)
     {
